@@ -6,7 +6,7 @@ public class EncryptString {
     // 字符串默认键值
     private static final String strDefaultKey = "yuxiang2023@#$%^&";
 
-    //加密工具
+    // 加密工具
     private final Cipher encryptCipher;
 
     // 解密工具
