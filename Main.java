@@ -16,7 +16,6 @@ public class Main extends JFrame implements ActionListener {
     private boolean isWrapLine = true;
     private EncryptString es;
     private final JCheckBoxMenuItem customKeyMenuItem;
-    private final JCheckBoxMenuItem setWrapLineMenuItem;
 
     public Main() {
         try {
@@ -48,7 +47,7 @@ public class Main extends JFrame implements ActionListener {
 
         JMenu settingMenu = new JMenu("设置");
         customKeyMenuItem = new JCheckBoxMenuItem("密钥");
-        setWrapLineMenuItem = new JCheckBoxMenuItem("换行", true);
+        JCheckBoxMenuItem setWrapLineMenuItem = new JCheckBoxMenuItem("换行", true);
         customKeyMenuItem.addItemListener(e -> {
             if (customKeyMenuItem.getState()) {
                 String key = JOptionPane.showInputDialog(Main.this, "请输入你自己的密钥：", "使用自定义密钥", JOptionPane.PLAIN_MESSAGE);
