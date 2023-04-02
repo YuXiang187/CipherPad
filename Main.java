@@ -1,18 +1,22 @@
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.*;
 import java.util.Objects;
 
 public class Main extends JFrame implements ActionListener {
 
     private final JTextArea textArea;
+    private boolean isWrapLine = true;
     private EncryptString es;
     private final JCheckBoxMenuItem customKeyMenuItem;
+    private final JCheckBoxMenuItem setWrapLineMenuItem;
 
     public Main() {
         try {
@@ -44,7 +48,7 @@ public class Main extends JFrame implements ActionListener {
 
         JMenu settingMenu = new JMenu("设置");
         customKeyMenuItem = new JCheckBoxMenuItem("密钥");
-        settingMenu.add(customKeyMenuItem);
+        setWrapLineMenuItem = new JCheckBoxMenuItem("换行", true);
         customKeyMenuItem.addItemListener(e -> {
             if (customKeyMenuItem.getState()) {
                 String key = JOptionPane.showInputDialog(Main.this, "请输入你自己的密钥：", "使用自定义密钥", JOptionPane.PLAIN_MESSAGE);
@@ -65,7 +69,22 @@ public class Main extends JFrame implements ActionListener {
                 }
             }
         });
+        setWrapLineMenuItem.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (isWrapLine) {
+                    textArea.setLineWrap(false);
+                    textArea.setWrapStyleWord(false);
+                    isWrapLine = false;
+                } else {
+                    textArea.setLineWrap(true);
+                    textArea.setWrapStyleWord(true);
+                    isWrapLine = true;
+                }
+            }
+        });
         settingMenu.add(customKeyMenuItem);
+        settingMenu.add(setWrapLineMenuItem);
 
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
@@ -73,14 +92,15 @@ public class Main extends JFrame implements ActionListener {
         setJMenuBar(menuBar);
 
         textArea = new JTextArea();
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        add(scrollPane, BorderLayout.CENTER);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        add(new JScrollPane(textArea), BorderLayout.CENTER);
 
         setVisible(true);
     }
 
     public static void main(String[] args) {
-        FlatLightLaf.setup();
+        FlatDarkLaf.setup();
         new Main();
     }
 
