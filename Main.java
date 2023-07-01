@@ -15,7 +15,6 @@ public class Main extends JFrame implements ActionListener {
     private final JTextArea textArea;
     private boolean isWrapLine = true;
     private EncryptString es;
-    private final JCheckBoxMenuItem customKeyMenuItem;
 
     public Main() {
         try {
@@ -46,19 +45,24 @@ public class Main extends JFrame implements ActionListener {
         editMenu.add(clearMenuItem);
 
         JMenu settingMenu = new JMenu("设置");
-        customKeyMenuItem = new JCheckBoxMenuItem("密钥");
+        JCheckBoxMenuItem customKeyMenuItem = new JCheckBoxMenuItem("密钥");
         JCheckBoxMenuItem setWrapLineMenuItem = new JCheckBoxMenuItem("换行", true);
         customKeyMenuItem.addItemListener(e -> {
             if (customKeyMenuItem.getState()) {
                 String key = JOptionPane.showInputDialog(Main.this, "请输入你自己的密钥：", "使用自定义密钥", JOptionPane.PLAIN_MESSAGE);
-                if (key == null || key.equals("")) {
-                    customKeyMenuItem.setState(false);
-                } else {
-                    try {
-                        es = new EncryptString(key);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                if (key != null) {
+                    if (key.length() == 16 || key.length() == 24 || key.length() == 32) {
+                        try {
+                            es = new EncryptString(key);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        customKeyMenuItem.setState(false);
+                        JOptionPane.showMessageDialog(Main.this, "无效的AES密钥长度。\n请使用16字节、24字节或32字节的密钥长度。", "错误", JOptionPane.ERROR_MESSAGE);
                     }
+                } else {
+                    customKeyMenuItem.setState(false);
                 }
             } else {
                 try {
@@ -71,14 +75,13 @@ public class Main extends JFrame implements ActionListener {
         setWrapLineMenuItem.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
+                isWrapLine = !isWrapLine;
                 if (isWrapLine) {
-                    textArea.setLineWrap(false);
-                    textArea.setWrapStyleWord(false);
-                    isWrapLine = false;
-                } else {
                     textArea.setLineWrap(true);
                     textArea.setWrapStyleWord(true);
-                    isWrapLine = true;
+                } else {
+                    textArea.setLineWrap(false);
+                    textArea.setWrapStyleWord(false);
                 }
             }
         });
