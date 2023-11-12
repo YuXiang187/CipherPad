@@ -8,7 +8,11 @@
 
 ---
 
-版本说明：
+YuXiang CipherPad 版本说明：
 
-* 2.0版本适用于YuXiang Drawer 3.0及以上的版本
-* 1.1版本适用于YuXiang Drawer 2.5及以上的版本
+* v2.0及以上
+  * 采用C#语言开发
+  * YuXiang Drawer 3.0及以上的版本适用
+* v1.1及以下
+  * 采用Java语言开发
+  * YuXiang Drawer 2.5及以下的版本适用
