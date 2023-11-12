@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -401,6 +401,12 @@ namespace CipherPad
                 _ = MessageBox.Show("文件保存成功：" + openStripStatusLabel.Text, "YuXiang CipherPad", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 filePath = "";
                 openStripStatusLabel.Text = "未打开文件";
+                textBox.Clear();
+                listBox.ClearSelected();
+                if (pool.Count == 1)
+                {
+                    pool.RemoveAt(0);
+                }
                 closeStripButton.Enabled = false;
             }
         }
