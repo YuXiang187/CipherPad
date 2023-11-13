@@ -311,12 +311,6 @@ namespace CipherPad
         {
             filePath = "";
             openStripStatusLabel.Text = "未打开文件";
-            textBox.Clear();
-            listBox.ClearSelected();
-            if (pool.Count == 1)
-            {
-                pool.RemoveAt(0);
-            }
             closeStripButton.Enabled = false;
         }
 
@@ -386,13 +380,16 @@ namespace CipherPad
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     File.WriteAllText(saveFileDialog.FileName, es.Encrypt(string.Join(",", pool)));
-                    pool.Clear();
+                    filePath = "";
+                    openStripStatusLabel.Text = "未打开文件";
                     textBox.Clear();
+                    listBox.ClearSelected();
                     listBox.DataSource = null;
                     if (pool.Count == 1)
                     {
                         pool.RemoveAt(0);
                     }
+                    closeStripButton.Enabled = false;
                 }
             }
             else
@@ -403,6 +400,7 @@ namespace CipherPad
                 openStripStatusLabel.Text = "未打开文件";
                 textBox.Clear();
                 listBox.ClearSelected();
+                listBox.DataSource = null;
                 if (pool.Count == 1)
                 {
                     pool.RemoveAt(0);
