@@ -355,6 +355,11 @@ namespace CipherPad
             {
                 int index = textBox.Text.IndexOf(searchText, foundIndex, StringComparison.OrdinalIgnoreCase);
 
+                if (!textBox.Focused)
+                {
+                    textBox.Focus();
+                }
+
                 if (index != -1)
                 {
                     textBox.Select(index, searchText.Length);
