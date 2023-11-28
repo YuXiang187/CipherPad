@@ -316,7 +316,7 @@ namespace CipherPad
 
         private void HelpStripButton_Click(object sender, EventArgs e)
         {
-            _ = MessageBox.Show("版本 2.0\n作者 YuXiang187\n\nYuXiang CipherPad 在 GPL-3.0 许可证下发布，源代码位于 Github 上。\n\n本软件用于编辑已加密的文本文档。\n\n如果你正在配合 YuXiang Drawer 使用本软件，请编辑 list.txt 文件。\n\n源代码地址：\nhttps://github.com/YuXiang187/CipherPad", "关于 YuXiang CipherPad", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            _ = MessageBox.Show("版本 2.1\n作者 YuXiang187\n\nYuXiang CipherPad 在 GPL-3.0 许可证下发布，源代码位于 Github 上。\n\n本软件用于编辑已加密的文本文档。\n\n如果你正在配合 YuXiang Drawer 使用本软件，请编辑 list.txt 文件。\n\n源代码地址：\nhttps://github.com/YuXiang187/CipherPad", "关于 YuXiang CipherPad", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void KeyStripButton_Click(object sender, EventArgs e)
